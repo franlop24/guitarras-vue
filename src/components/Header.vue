@@ -1,5 +1,10 @@
 <script setup>
-
+const props = defineProps({
+    carrito: {
+        type: Array,
+        required: true
+    }
+})
 </script>
 
 <template>
@@ -18,7 +23,10 @@
                         <img class="img-fluid" src="/img/carrito.png" alt="imagen carrito" />
 
                         <div id="carrito" class="bg-white p-3">
-                            <p class="text-center">El carrito esta vacio</p>
+                            <p 
+                                v-if="carrito.length === 0"
+                                class="text-center">El carrito esta vacio</p>
+                            <div v-else>
                             <table class="w-100 table">
                                 <thead>
                                     <tr>
@@ -30,13 +38,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr v-for="item in carrito">
                                         <td>
-                                            <img class="img-fluid" src="/img/guitarra_02.jpg" alt="imagen guitarra">
+                                            <img class="img-fluid" 
+                                                :src="'/img/' + item.imagen + '.jpg'" 
+                                                :alt="'imagen guitarra ' + item.nombre">
                                         </td>
-                                        <td>SRV</td>
+                                        <td>{{ item.nombre }}</td>
                                         <td class="fw-bold">
-                                                $299
+                                                ${{ item.precio }}
                                         </td>
                                         <td class="flex align-items-start gap-4">
                                             <button
@@ -45,7 +55,7 @@
                                             >
                                                 -
                                             </button>
-                                                1
+                                                {{ item.cantidad }}
                                             <button
                                                 type="button"
                                                 class="btn btn-dark"
@@ -67,6 +77,7 @@
 
                             <p class="text-end">Total pagar: <span class="fw-bold">$899</span></p>
                             <button class="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                        </div>
                         </div>
                     </div>
                 </nav>

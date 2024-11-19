@@ -11,14 +11,21 @@ const carrito = ref([])
 onMounted(() => guitarras.value = db)
 
 function agregarCarrito(guitarra){
-    guitarra.cantidad = 1
-    carrito.value.push(guitarra)
+    const id_producto = carrito.value.findIndex(c => c.id === guitarra.id)
+    if(id_producto === -1){
+        guitarra.cantidad = 1
+        carrito.value.push(guitarra)
+    } else {
+        carrito.value[id_producto].cantidad++
+    }
 }
 
 </script>
 
 <template>
-    <Header />
+    <Header 
+        :carrito="carrito"
+    />
     <main class="container-xl mt-5">
         <h2 class="text-center">Nuestra Colección</h2>
 

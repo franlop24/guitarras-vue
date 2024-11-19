@@ -3,7 +3,7 @@
 const props = defineProps({
     guitarra: {
         type: Object,
-        require: true
+        required: true
     }
 })
 

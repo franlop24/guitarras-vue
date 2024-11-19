@@ -7,8 +7,8 @@ const guitarras = ref([])
 
 onMounted(() => guitarras.value = db)
 
-function agregarCarrito(){
-    console.log('Agregando a Carrito')
+function agregarCarrito(guitarra){
+    console.log(guitarra)
 }
 
 </script>
